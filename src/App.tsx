@@ -1,26 +1,50 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import InputField from "./components/InputField";
+import TodoList from "./components/TodoList";
+import { Todo } from "./model";
 
-function App() {
+const App: React.FunctionComponent = () => {
+  const [todo, setTodo] = useState<string>("");
+  const [todos, setTodos] = useState<Todo[]>([]);
+
+  const handleAdd = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (todo) {
+      setTodos([...todos, { id: Date.now(), todo: todo, isDone: false }]);
+      setTodo("");
+    }
+  };
+
+  console.log(todo);
+  console.log(todos);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <span className="heading">Tasks</span>
+
+      <InputField todo={todo} setTodo={setTodo} handleAdd={handleAdd} />
+      <TodoList todos={todos} setTodos={setTodos} />
     </div>
   );
-}
+};
 
 export default App;
+
+// let name: string;
+// name = "Jeff";
+// let age: number | string;
+// age = "22";
+// let isStudent: boolean;
+// isStudent = true;
+// let hobbies: string[];
+// hobbies = ["ten", "four"];
+// let ages: number[];
+// ages = [2, 3, 4];
+// let role: [number, string];
+// role = [4, "hello"];
+
+// const printName = (name: string) => {
+//   console.log(name);
+// };
+// printName("Rick");
