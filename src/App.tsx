@@ -16,7 +16,6 @@ const App: React.FunctionComponent = () => {
     }
   };
 
-  console.log(todo);
   console.log(todos);
 
   return (
